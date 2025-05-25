@@ -1,17 +1,11 @@
-import { useState } from 'react'
+import { Game } from "./components/Game"
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <main className='flex flex-col gap-2 justify-center items-center h-screen'>
-        <h1 className='text-3xl'>Hello World</h1>
-        <button className='btn' onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </main>
-    </>
+    <div className='p-4 flex flex-col gap-8'>
+      <h1 className='text-3xl font-bold text-center'>Pin Game</h1>
+      <Game />
+    </div>
   )
 }
 
