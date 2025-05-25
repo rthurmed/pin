@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+/* https://daisyui.com/docs/themes/ */
+@plugin "daisyui" {
+  themes: coffee --default;
+}
+
