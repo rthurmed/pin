@@ -12,7 +12,7 @@ export function generateSecret(length: number): string[] {
   return values;
 }
 
-function computeResult(value: string[], secret: string[]): AttemptItemResult[] {
+function computeResult(value: string[], secret: string[]): number[] {
   return value.map((item, index) => {
     if (item === secret[index]) {
       return AttemptItemResult.HIT;

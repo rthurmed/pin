@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 export interface HistoryItemIconProps {
   success: boolean;
-  result: AttemptItemResult[];
+  result: number[];
 }
 
 export function HistoryItemIcon({

@@ -1,6 +1,6 @@
 interface Attempt {
   value: string[];
-  result: AttemptItemResult[];
+  result: number[];
   timestamp: number;
   success: boolean;
 }

@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import { range } from "../utils";
 
 export interface PinInputProps {
@@ -16,10 +16,12 @@ export function PinInput({
   onChange,
   validOptions = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
 }: PinInputProps) {
+  const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
       const char = e.target.value.charAt(0);
-      if (!validOptions.includes(char)) {
+      if (char && !validOptions.includes(char)) {
         return;
       }
 
@@ -27,11 +29,13 @@ export function PinInput({
       newValue[index] = char;
       onChange(newValue);
 
+      let next = null;
       if (char) {
-        e.target.nextSibling?.focus();
+        next = inputRefs.current[index + 1];
       } else {
-        e.target.previousSibling?.focus();
+        next = inputRefs.current[index - 1];
       }
+      next?.focus();
     },
     [value, maxLength, validOptions, onChange]
   )
@@ -41,6 +45,7 @@ export function PinInput({
       {range(0, maxLength).map((i) => (
         <input
           key={i}
+          ref={elem => { inputRefs.current[i] = elem }}
           type='text'
           value={value[i] ?? ''}
           onChange={(e) => handleInputChange(e, i)}
