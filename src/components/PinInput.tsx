@@ -47,10 +47,12 @@ export function PinInput({
           key={i}
           ref={elem => { inputRefs.current[i] = elem }}
           type='text'
+          className='input input-xl input-bordered w-full text-center appearance-none'
+          inputMode="numeric"
+          pattern="[0-9]*"
           value={value[i] ?? ''}
-          onChange={(e) => handleInputChange(e, i)}
-          className='input input-xl input-bordered w-full text-center'
           disabled={disabled}
+          onChange={(e) => handleInputChange(e, i)}
         />
       ))}
     </div>
