@@ -1,15 +1,37 @@
-import { range } from "../utils";
+import { AttemptItemResult } from "../utils/game";
 
 export function generateSecret(length: number): string[] {
-  return range(0, length).map(() => Math.floor(Math.random() * 10).toString());
+  const values: string[] = [];
+  for (let i = 0; i < length; i++) {
+    let value: string | undefined = undefined;
+    while (value === undefined || values.includes(value)) {
+      value = Math.floor(Math.random() * 10).toString();
+    }
+    values.push(value);
+  }
+  return values;
+}
+
+function computeResult(value: string[], secret: string[]): AttemptItemResult[] {
+  return value.map((item, index) => {
+    if (item === secret[index]) {
+      return AttemptItemResult.HIT;
+    }
+    if (secret.includes(item)) {
+      return AttemptItemResult.WRONG_POSITION;
+    }
+    return AttemptItemResult.MISS;
+  })
 }
 
 function submitAction(state: GameState, value: string[]): GameState {
   const charMatches = value.filter((char) => state.secret.includes(char)).length;
   const positionMatches = value.filter((char, i) => char === state.secret[i]).length;
   const success = positionMatches === state.secret.length;
+  const result = computeResult(value, state.secret);
   const attempt = {
     value,
+    result,
     charMatches,
     positionMatches,
     timestamp: Date.now(),

@@ -1,7 +1,6 @@
 interface Attempt {
   value: string[];
-  charMatches: number;
-  positionMatches: number;
+  result: AttemptItemResult[];
   timestamp: number;
   success: boolean;
 }

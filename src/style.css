@@ -5,3 +5,6 @@
   themes: coffee --default;
 }
 
+:root {
+  --border: 4px;
+}
