@@ -1,6 +1,6 @@
+import clsx from "clsx";
 import { useCallback, useMemo, useState } from "react";
 import { PinInput } from "./PinInput";
-import clsx from "clsx";
 
 export interface PinFormProps {
   className?: string;
@@ -45,7 +45,7 @@ export function PinForm({
       onReset={handleReset}
     >
       <p className="text-md text-center">
-        Try to guess the {length} digit code
+        Guess the {length} digit code
       </p>
       <PinInput
         value={pin}

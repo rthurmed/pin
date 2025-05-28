@@ -20,7 +20,7 @@ export function Game() {
     <main className="flex flex-col pb-48">
       <History attempts={state.attempts} />
       <PinForm
-        className="fixed bottom-0 left-0 right-0 p-8 pt-4 bg-base-100 shadow-2xl upward-shadow"
+        className="fixed top-[calc(100svh-200px)] left-0 right-0 p-8 pt-4 bg-base-100 shadow-2xl upward-shadow"
         disabled={state.success}
         length={state.length}
         onSubmit={handleSubmit}

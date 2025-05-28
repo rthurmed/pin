@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { HistoryItem } from "./HistoryItem";
+import { Attempt } from "./Attempt";
 
 export interface HistoryProps {
   attempts: Attempt[];
@@ -18,7 +18,7 @@ export function History({
         Your past attempts
       </li>
       {attempts.map((item, i) => (
-        <HistoryItem key={i} {...item} />
+        <Attempt key={i} {...item} />
       ))}
     </ul>
   )

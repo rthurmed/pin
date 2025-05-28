@@ -1,33 +1,18 @@
-import { useMemo } from "react";
-import { AttemptItemResult } from "../utils/game";
 import clsx from "clsx";
+import { AttemptItemResult } from "../../utils/game";
 
-export interface HistoryItemIconProps {
-  success: boolean;
-  result: number[];
+export interface IconProps {
+  value: number;
 }
 
-export function HistoryItemIcon({
-  success,
-  result
-}: HistoryItemIconProps) {
-  const status = useMemo(() => {
-    if (success) {
-      return 'success';
-    } else if (result.includes(AttemptItemResult.HIT)) {
-      return 'positionmatches';
-    } else if (result.includes(AttemptItemResult.WRONG_POSITION)) {
-      return 'charmatches';
-    } else {
-      return 'fail';
-    }
-  }, [success, result]);
-
+export function Icon({
+  value
+}: IconProps) {
   return (
     <>
       <div
         className={clsx('text-success', {
-          "hidden": status !== 'success',
+          "hidden": value !== -1,
         })}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
@@ -36,7 +21,7 @@ export function HistoryItemIcon({
       </div>
       <div
         className={clsx('text-warning', {
-          "hidden": status !== 'positionmatches',
+          "hidden": value !== AttemptItemResult.HIT,
         })}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
@@ -45,7 +30,7 @@ export function HistoryItemIcon({
       </div>
       <div
         className={clsx('text-warning', {
-          "hidden": status !== 'charmatches',
+          "hidden": value !== AttemptItemResult.WRONG_POSITION,
         })}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
@@ -54,7 +39,7 @@ export function HistoryItemIcon({
       </div>
       <div
         className={clsx('text-error', {
-          "hidden": status !== 'fail',
+          "hidden": value !== AttemptItemResult.MISS,
         })}
       >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
