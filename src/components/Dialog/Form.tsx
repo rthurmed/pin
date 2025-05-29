@@ -1,20 +1,21 @@
 import clsx from "clsx";
 import { useCallback, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { submit } from "../../store/game/actions";
+import { selectLength, selectSuccess } from "../../store/game/selectors";
 import { SegmentedInput } from "./SegmentedInput";
 
 export interface FormProps {
   className?: string;
-  disabled: boolean;
-  length: number;
-  onSubmit: (value: string[]) => void;
 }
 
 export function Form({
-  disabled,
-  length,
-  onSubmit,
   className,
 }: FormProps) {
+  const length = useSelector(selectLength);
+  const success = useSelector(selectSuccess);
+  const dispatch = useDispatch();
+
   const [pin, setPin] = useState<string[]>([]);
 
   const isValid = useMemo(() => {
@@ -29,14 +30,14 @@ export function Form({
     if (!isValid) {
       return;
     }
-    onSubmit(pin);
+    dispatch(submit(pin));
     setPin([]);
-  }, [isValid, pin, onSubmit]);
+  }, [isValid, pin, dispatch]);
 
   const handleReset = useCallback((e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setPin([]);
-  }, [setPin]);
+  }, []);
 
   return (
     <form
@@ -51,20 +52,20 @@ export function Form({
         value={pin}
         maxLength={length}
         onChange={setPin}
-        disabled={disabled}
+        disabled={success}
       />
       <div className="flex flex-row gap-2 items-stretch">
         <button
           type='reset'
           className='btn btn-neutral flex-1'
-          disabled={disabled}
+          disabled={success}
         >
           Reset
         </button>
         <button
           type='submit'
           className='btn btn-primary flex-1'
-          disabled={disabled || !isValid}
+          disabled={success || !isValid}
         >
           Submit
         </button>

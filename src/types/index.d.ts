@@ -11,10 +11,3 @@ interface GameState {
   attempts: Attempt[];
   success: boolean;
 }
-
-type GameAction = {
-  type: 'submit';
-  payload: string[];
-} | {
-  type: 'reset';
-}

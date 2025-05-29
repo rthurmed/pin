@@ -1,13 +1,10 @@
 import clsx from "clsx";
+import { useSelector } from "react-redux";
+import { selectAttempts } from "../../store/game/selectors";
 import { Attempt } from "./Attempt";
 
-export interface HistoryProps {
-  attempts: Attempt[];
-}
-
-export function History({
-  attempts
-}: HistoryProps) {
+export function History() {
+  const attempts = useSelector(selectAttempts);
   return (
     <ul className='list'>
       <li

@@ -2,15 +2,7 @@ import { useMemo } from "react";
 import { useVisualViewport } from "../../hooks/useVisualViewport";
 import { Form } from "./Form";
 
-export interface DialogProps {
-  state: GameState;
-  onSubmit: (value: string[]) => void;
-}
-
-export function Dialog({
-  state,
-  onSubmit
-}: DialogProps) {
+export function Dialog() {
   const { height } = useVisualViewport();
 
   const dialogStyle = useMemo(() => {
@@ -26,9 +18,6 @@ export function Dialog({
     >
       <Form
         className="p-8 pt-4 bg-base-100 shadow-2xl upward-shadow md:max-w-[600px] md:rounded-t-2xl"
-        disabled={state.success}
-        length={state.length}
-        onSubmit={onSubmit}
       />
     </div>
   )

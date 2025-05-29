@@ -23,7 +23,7 @@ export function Attempt({
   }, [success, result]);
 
   const orderedResults = useMemo(() => {
-    return result.sort((a, b) => a - b)
+    return [...result].sort((a, b) => a - b)
   }, [result])
 
   return (
