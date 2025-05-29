@@ -20,7 +20,7 @@ export function SegmentedInput({
 
   const handleInputChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>, index: number) => {
-      const char = e.target.value.charAt(0);
+      const char = e.target.value.at(-1) ?? '';
       if (char && !validOptions.includes(char)) {
         return;
       }
