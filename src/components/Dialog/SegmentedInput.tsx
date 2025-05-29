@@ -1,7 +1,7 @@
 import { useCallback, useRef } from "react";
-import { range } from "../utils";
+import { range } from "../../utils";
 
-export interface PinInputProps {
+export interface SegmentedInputProps {
   value: string[];
   maxLength: number;
   disabled: boolean;
@@ -9,13 +9,13 @@ export interface PinInputProps {
   validOptions?: string[];
 }
 
-export function PinInput({
+export function SegmentedInput({
   value,
   maxLength,
   disabled,
   onChange,
   validOptions = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'],
-}: PinInputProps) {
+}: SegmentedInputProps) {
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
 
   const handleInputChange = useCallback(

@@ -1,7 +1,7 @@
 import { useCallback, useReducer } from "react";
 import { gameReducer, generateSecret } from "../reducers/gameReducer";
+import { Dialog } from "./Dialog";
 import { History } from "./History";
-import { PinForm } from "./PinForm";
 
 export function Game() {
   const BASE_LENGTH = 4;
@@ -17,14 +17,9 @@ export function Game() {
   }, [dispatch]);
 
   return (
-    <main className="flex flex-col pb-48">
+    <main className="flex flex-col pb-48 w-full md:max-w-[600px] m-auto">
       <History attempts={state.attempts} />
-      <PinForm
-        className="fixed top-[calc(100svh-200px)] left-0 right-0 p-8 pt-4 bg-base-100 shadow-2xl upward-shadow"
-        disabled={state.success}
-        length={state.length}
-        onSubmit={handleSubmit}
-      />
+      <Dialog state={state} onSubmit={handleSubmit} />
     </main>
   )
 }

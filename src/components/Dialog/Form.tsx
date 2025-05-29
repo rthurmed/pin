@@ -1,20 +1,20 @@
 import clsx from "clsx";
 import { useCallback, useMemo, useState } from "react";
-import { PinInput } from "./PinInput";
+import { SegmentedInput } from "./SegmentedInput";
 
-export interface PinFormProps {
+export interface FormProps {
   className?: string;
   disabled: boolean;
   length: number;
   onSubmit: (value: string[]) => void;
 }
 
-export function PinForm({
+export function Form({
   disabled,
   length,
   onSubmit,
   className,
-}: PinFormProps) {
+}: FormProps) {
   const [pin, setPin] = useState<string[]>([]);
 
   const isValid = useMemo(() => {
@@ -47,7 +47,7 @@ export function PinForm({
       <p className="text-md text-center">
         Guess the {length} digit code
       </p>
-      <PinInput
+      <SegmentedInput
         value={pin}
         maxLength={length}
         onChange={setPin}
