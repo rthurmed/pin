@@ -12,6 +12,7 @@ export const gameSlice = createSlice({
       const positionMatches = value.filter((char, i) => char === state.secret[i]).length;
       const success = positionMatches === state.secret.length;
       const result = computeResult(value, state.secret);
+
       const attempt = {
         value,
         result,
@@ -20,13 +21,23 @@ export const gameSlice = createSlice({
         timestamp: Date.now(),
         success,
       };
+
       state.attempts.unshift(attempt);
       state.success = success;
+
+      if (!state.startedAt) {
+        state.startedAt = Date.now();
+      }
+      if (success && !state.completedAt) {
+        state.completedAt = Date.now();
+      }
     },
     reset: (state) => {
       state.secret = generateSecret(state.length);
       state.attempts = [];
       state.success = false;
+      state.startedAt = undefined;
+      state.completedAt = undefined;
     }
   }
 })

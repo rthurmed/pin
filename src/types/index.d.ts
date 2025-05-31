@@ -10,4 +10,6 @@ interface GameState {
   secret: string[];
   attempts: Attempt[];
   success: boolean;
+  startedAt?: number;
+  completedAt?: number;
 }
